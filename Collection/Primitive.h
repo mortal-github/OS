@@ -1,5 +1,5 @@
-#ifndef _COLLECTION__H_
-#define _COLLECTION__H_
+#ifndef _PRIMITIVE__H_
+#define _PRIMITIVE__H_
 
 #include <inttypes.h>
 
@@ -17,4 +17,4 @@ typedef Pointer Element;
 #define TRUE 1
 #define FALSE 0
 
-#endif // !_COLLECTION__H_
+#endif // !_PRIMITIVE__H_

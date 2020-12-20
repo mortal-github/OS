@@ -1,7 +1,7 @@
 #ifndef _ARRAY_LIST__H_
 #define _ARRAY_LIST__H_
 
-#include "Collection.h"
+#include "Primitive.h"
 
 typedef struct ArrayList {
 	Element* elements;

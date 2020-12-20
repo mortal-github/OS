@@ -1,7 +1,7 @@
 #ifndef _HEAP__H_
 #define _HEAP__H_
 
-#include "Collection.h"
+#include "Primitive.h"
 #include "ArrayList.h"
 
 typedef struct Heap {

@@ -1,7 +1,7 @@
 #ifndef _LINK_LIST__H_
 #define _LINK_LIST__H_
 
-#include "Collection.h"
+#include "Primitive.h"
 
 typedef struct LinkNode {
 	Element element;

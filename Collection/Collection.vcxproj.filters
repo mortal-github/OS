@@ -27,9 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Collection.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ArrayList.h">
       <Filter>头文件\List</Filter>
     </ClInclude>
@@ -38,6 +35,9 @@
     </ClInclude>
     <ClInclude Include="Heap.h">
       <Filter>头文件\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitive.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

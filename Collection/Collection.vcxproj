@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ArrayList.h" />
-    <ClInclude Include="Collection.h" />
+    <ClInclude Include="Primitive.h" />
     <ClInclude Include="Heap.h" />
     <ClInclude Include="LinkList.h" />
   </ItemGroup>
