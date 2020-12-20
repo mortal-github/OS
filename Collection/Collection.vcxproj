@@ -139,6 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ArrayList.h" />
+    <ClInclude Include="Collection.h" />
+    <ClInclude Include="Heap.h" />
+    <ClInclude Include="LinkList.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArrayList.c" />
+    <ClCompile Include="Heap.c" />
+    <ClCompile Include="LinkList.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

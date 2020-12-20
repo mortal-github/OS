@@ -13,5 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\List">
+      <UniqueIdentifier>{747a8fbc-5430-4ec6-8f49-b07fb110ab14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\List">
+      <UniqueIdentifier>{d036424c-4666-47c7-bff2-6c8b4655b340}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Tree">
+      <UniqueIdentifier>{e0ebe96d-3b6d-41fa-b363-882a236ab9dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Tree">
+      <UniqueIdentifier>{ca2501d3-591c-40a0-a1e5-cb2498b29532}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Collection.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayList.h">
+      <Filter>头文件\List</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkList.h">
+      <Filter>头文件\List</Filter>
+    </ClInclude>
+    <ClInclude Include="Heap.h">
+      <Filter>头文件\Tree</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArrayList.c">
+      <Filter>源文件\List</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkList.c">
+      <Filter>源文件\List</Filter>
+    </ClCompile>
+    <ClCompile Include="Heap.c">
+      <Filter>源文件\Tree</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
