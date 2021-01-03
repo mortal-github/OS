@@ -150,7 +150,7 @@ Boolean PM_block(PM* pm, PCB* pcb) {
 		return FALSE;
 	}
 	//²åÈë×èÈû¶ÓÁÐ
-	if (FALSE == ArrayList_add(&(pm->blocked), pm->blocked.size, pm->run)) {
+	if (FALSE == ArrayList_add(&(pm->blocked), pm->blocked.size, pcb)) {
 		ArrayList_add(&(pm->runnable), index, pcb);
 		return FALSE;
 	}

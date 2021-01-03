@@ -145,12 +145,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Deadlock.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="PCB.c" />
     <ClCompile Include="PM.c" />
     <ClCompile Include="PS.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Deadlock.h" />
     <ClInclude Include="PCB.h" />
     <ClInclude Include="PM.h" />
     <ClInclude Include="PS.h" />
