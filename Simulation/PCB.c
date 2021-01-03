@@ -10,6 +10,7 @@ Boolean PCB_init(PCB* pcb, Int id)
 	pcb->status = CREATING;
 	pcb->priority = 0;
 	pcb->arrive = 0;
+	pcb->terminated = 0;
 	pcb->length = 0;
 	pcb->run = 0;
 	return TRUE;
@@ -65,6 +66,15 @@ Boolean PCB_setArrive(PCB* pcb, Long arrive)
 	return TRUE;
 }
 
+Boolean PCB_setTerminate(PCB* pcb, Long terminate)
+{
+	if (NULL == pcb || terminate <= pcb->arrive) {
+		return FALSE;
+	}
+	pcb->terminated = terminate;
+	return TRUE;
+}
+
 Boolean PCB_setLength(PCB* pcb, Int length)
 {
 	if (NULL == pcb || length < 1) {
@@ -76,7 +86,7 @@ Boolean PCB_setLength(PCB* pcb, Int length)
 
 Boolean PCB_addRun(PCB* pcb, Int time)
 {
-	if (NULL == pcb || time <= 1) {
+	if (NULL == pcb || time < 1) {
 		return FALSE;
 	}
 	pcb->run += time;

@@ -135,3 +135,16 @@ void ArrayList_swap(ArrayList* list, Int index1, Int index2) {
 	element = ArrayList_set(list, index2, element);
 	ArrayList_set(list, index1, element);
 }
+
+Int ArrayList_indexOf(ArrayList* list, Element element, Boolean(*equals)(Element left, Element right))
+{
+	if (NULL == list || NULL == element || NULL == equals) {
+		return -1;
+	}
+	for (Int i = 0; i < list->size; i++) {
+		if (TRUE == equals(element, *(list->elements + i))) {
+			return i;
+		}
+	}
+	return -1;
+}

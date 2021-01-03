@@ -66,24 +66,26 @@ Boolean Heap_shiftDown(Heap* heap, Int index)
         else {
             left = ArrayList_get(heap->list, lchild - 1);
             right = ArrayList_get(heap->list, rchild - 1);
-            if (heap->tag == heap->prior(left, right)) {
-                pchild = lchild;
+            if (heap->tag == heap->prior(right, left)) {
+                pchild = rchild;
             }
             else {
-                pchild = rchild;
+                pchild = lchild;
             }
         }
 
         //比较父子
         left = *(heap->list->elements + parent - 1);
         right = *(heap->list->elements + pchild - 1);
-        if (heap->tag == heap->prior(left, right)) {//父亲优先，结束筛选
-            break;
+        //孩子优先
+        if (heap->tag == heap->prior(right, left)) {
+            //交换父子
+            ArrayList_swap(heap->list, pchild - 1, parent - 1);
+            parent = pchild;
         }
-
-        //交换父子
-        ArrayList_swap(heap->list, pchild - 1, parent - 1);
-        parent = pchild;
+        else {
+            break;//父亲优先，则结束筛选。
+        }
     }
 
     //筛选成功

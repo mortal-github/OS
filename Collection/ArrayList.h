@@ -94,4 +94,13 @@ Element ArrayList_set(ArrayList* list, Int index, Element element);
  隐式条件：数组链表是初始化过的，且只通过函数写数组链表。
 */
 void ArrayList_swap(ArrayList* list, Int index1, Int index2);
+
+/*
+ 获取等价于element的第一元素的索引。
+ 输入条件：NULL!=list,NULL!=element,NULL!=equals。
+ 正常处理：获取等价于element的第一元素的索引。
+ 错误处理：不满足输入条件或查找失败，返回-1。
+ 隐式条件：数组链表是初始化过的，且只通过函数写数组链表；equals确实比较element和list中的元素。
+*/
+Int ArrayList_indexOf(ArrayList* list, Element element, Boolean(*equals)(Element left, Element right));
 #endif // !_ARRAY_LIST__H_

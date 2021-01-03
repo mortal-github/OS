@@ -18,8 +18,9 @@ typedef struct PCB {
 
 	//进程调度信息
 	Byte status;
-	Int priority;
+	double priority;
 	Long arrive;
+	Long terminated;
 	Int length;
 	Int run;
 
@@ -78,6 +79,14 @@ Boolean PCB_setPriority(PCB* pcb, Int priority);
  */
 Boolean PCB_setArrive(PCB* pcb, Long arrive);
 /*
+ 设置进程结束时间。
+ 输入条件：NULL!=pcbm, arrive>=0。
+ 正常处理：设置进程结束时间，返回TRUE。
+ 错误处理：若不满足输入条件，返回FALSE。
+ 隐式条件:
+ */
+Boolean PCB_setTerminate(PCB* pcb, Long terminate);
+/*
  设置进程长度。
  输入条件：NULL!=pcbm, length>0。
  正常处理：设置进程长度，返回TRUE。
@@ -93,6 +102,4 @@ Boolean PCB_setLength(PCB* pcb, Int length);
  隐式条件:
  */
 Boolean PCB_addRun(PCB* pcb, Int time);
-
-
 #endif // !_PCB__H_

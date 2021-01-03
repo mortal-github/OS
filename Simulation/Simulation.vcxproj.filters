@@ -27,9 +27,21 @@
     <ClCompile Include="PCB.c">
       <Filter>源文件\Process</Filter>
     </ClCompile>
+    <ClCompile Include="PM.c">
+      <Filter>源文件\Process</Filter>
+    </ClCompile>
+    <ClCompile Include="PS.c">
+      <Filter>源文件\Process</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PCB.h">
+      <Filter>头文件\Process</Filter>
+    </ClInclude>
+    <ClInclude Include="PM.h">
+      <Filter>头文件\Process</Filter>
+    </ClInclude>
+    <ClInclude Include="PS.h">
       <Filter>头文件\Process</Filter>
     </ClInclude>
   </ItemGroup>
