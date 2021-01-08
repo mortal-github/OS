@@ -39,6 +39,9 @@
     <ClInclude Include="Primitive.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="IndexList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArrayList.c">
@@ -49,6 +52,12 @@
     </ClCompile>
     <ClCompile Include="Heap.c">
       <Filter>源文件\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitive.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexList.c">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

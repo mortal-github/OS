@@ -19,6 +19,18 @@
     <Filter Include="源文件\Process">
       <UniqueIdentifier>{2e6fb4f0-770c-4153-9f19-58e039a6d1b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Storage">
+      <UniqueIdentifier>{9a9a49d9-03e4-4d5b-b6af-c80fd8b4d9b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Storage">
+      <UniqueIdentifier>{98f3399c-af23-44d3-ba5e-b6d385bd04ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\IOSystem">
+      <UniqueIdentifier>{fac835c4-7a8a-476e-8af1-180116347215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\IOSystem">
+      <UniqueIdentifier>{1650bcb7-9324-453d-8fc0-667d03bbcad0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -36,6 +48,12 @@
     <ClCompile Include="Deadlock.c">
       <Filter>源文件\Process</Filter>
     </ClCompile>
+    <ClCompile Include="DynamicPartition.c">
+      <Filter>源文件\Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="DiskSchedule.c">
+      <Filter>源文件\IOSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PCB.h">
@@ -49,6 +67,12 @@
     </ClInclude>
     <ClInclude Include="Deadlock.h">
       <Filter>头文件\Process</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicPartition.h">
+      <Filter>头文件\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="DiskSchedule.h">
+      <Filter>头文件\IOSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,19 +26,19 @@ Boolean LinkList_swap(LinkList* list, LinkNode* node1, LinkNode* node2);
 /*
  在节点前插入一个新元素。
  输入条件：NULL!=list, NULL!=node, NULL!=element。
- 正常处理：在节点前插入一个新元素，返回TRUE。
- 错误处理：若不满足输入条件，则什么都不做，返回FALSE;插入失败返回FALSE。
+ 正常处理：在节点前插入一个新元素，返回节点。
+ 错误处理：若不满足输入条件，则什么都不做，返回NULL;插入失败返回NULL。
  隐式条件：list初始化过，且只通过函数写list；node是list的节点，element是合理合法的。
 */
-Boolean LinkList_addPrevious(LinkList* list, LinkNode* node, Element element);
+LinkNode* LinkList_addPrevious(LinkList* list, LinkNode* node, Element element);
 /*
  在节点后插入一个新元素。
  输入条件：NULL!=list, NULL!=node, NULL!=element。
- 正常处理：在节点前插入一个新元素，返回TRUE。
- 错误处理：若不满足输入条件，则什么都不做，返回FALSE;插入失败返回FALSE。
+ 正常处理：在节点前插入一个新元素，返回节点。
+ 错误处理：若不满足输入条件，则什么都不做，返回NULL;插入失败返回NULL。
  隐式条件：list初始化过，且只通过函数写list；node是list的节点，element是合理合法的。
 */
-Boolean LinkList_addAfter(LinkList* list, LinkNode* node, Element element);
+LinkNode* LinkList_addAfter(LinkList* list, LinkNode* node, Element element);
 /*
  插入一个新元素。
  输入条件：NULL!=list, NULL!=element。

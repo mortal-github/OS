@@ -103,4 +103,6 @@ void ArrayList_swap(ArrayList* list, Int index1, Int index2);
  隐式条件：数组链表是初始化过的，且只通过函数写数组链表；equals确实比较element和list中的元素。
 */
 Int ArrayList_indexOf(ArrayList* list, Element element, Boolean(*equals)(Element left, Element right));
+
+
 #endif // !_ARRAY_LIST__H_

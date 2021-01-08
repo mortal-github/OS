@@ -6,91 +6,6 @@
 #include <time.h>
 #include "PS.h"
 
-/*若能分配资源，则释放已经分配的资源给available
-为了在后续操作中恢复原样，不改变allocation.had, 以便后续算法恢复原有的资源分配情况。*/
-Boolean DeadLock_security_releaseIfEnable(Banker* banker, Int index) {
-	if (NULL == banker || index < 0 || index >= banker->process_count) {
-		return FALSE;
-	}
-	Allocation* allocation = ArrayList_get(&(banker->allocations), index);
-	if (NULL == allocation) {
-		return FALSE;
-	}
-
-	//释放资源
-	Int i = 0;
-	Boolean success = TRUE;
-	Resource* resource;
-	AllocationCounter* counter;
-	Int max = 0;
-	Int had = 0;
-	for (; i < banker->resource_count; i++) {
-		resource = ArrayList_get(&(banker->resources), i);
-		assert(NULL != resource);
-	
-		counter = ArrayList_get(&(allocation->counter), i);
-		assert(counter != NULL);
-
-		max = counter->max;
-		had = counter->had;
-
-		if (max < 0 || had < 0) {//断言
-			success = FALSE;
-			break;
-		}
-		//可分配，则可释放
-		if (max <= had + resource->count) {
-			resource->count += had;
-		}
-		else {
-			success = FALSE;
-			break;
-		}
-	}
-
-	//恢复分配
-	if (FALSE == success) {
-		i = i - 1;
-		for (; i > -1; i--) {
-			resource = ArrayList_get(&(banker->resources), i);
-			counter = ArrayList_get(&(allocation->counter), i);
-			assert(counter != NULL);
-			had = counter->had;
-			//恢复分配
-			resource->count -= had;
-		}
-	}
-
-	return success;
-}
-
-Boolean DeadLock_security_recoverRelease(Banker* banker, Int index) {
-	if (NULL == banker || index < 0 || index >= banker->process_count) {
-		return FALSE;
-	}
-	//获得分配行
-	Allocation* allocation = ArrayList_get(&(banker->allocations), index);
-	if (NULL == allocation) {//断言
-		return FALSE;
-	}
-	//恢复分配，即再分配
-	Resource* resource;
-	AllocationCounter* counter;
-	Int had = 0;
-	for (Int i = 0; i < banker->resource_count; i++) {
-		resource = ArrayList_get(&(banker->resources), i);
-		if (NULL == resource) {//断言
-			return FALSE;
-		}
-		counter = ArrayList_get(&(allocation->counter), i);
-		assert(NULL != counter);
-		//恢复分配
-		resource->count -= counter->had;
-	}
-
-	return TRUE;
-}
-
 Boolean DeadLock_init(Banker* banker)
 {
 	if (NULL == banker) {
@@ -316,6 +231,92 @@ Boolean DeadLock_releaseIfFull(Banker* banker, Int index)
 		resource->count += counter->had;
 		counter->had = 0;
 	}
+	return TRUE;
+}
+
+
+/*若能分配资源，则释放已经分配的资源给available
+为了在后续操作中恢复原样，不改变allocation.had, 以便后续算法恢复原有的资源分配情况。*/
+Boolean DeadLock_security_releaseIfEnable(Banker* banker, Int index) {
+	if (NULL == banker || index < 0 || index >= banker->process_count) {
+		return FALSE;
+	}
+	Allocation* allocation = ArrayList_get(&(banker->allocations), index);
+	if (NULL == allocation) {
+		return FALSE;
+	}
+
+	//释放资源
+	Int i = 0;
+	Boolean success = TRUE;
+	Resource* resource;
+	AllocationCounter* counter;
+	Int max = 0;
+	Int had = 0;
+	for (; i < banker->resource_count; i++) {
+		resource = ArrayList_get(&(banker->resources), i);
+		assert(NULL != resource);
+
+		counter = ArrayList_get(&(allocation->counter), i);
+		assert(counter != NULL);
+
+		max = counter->max;
+		had = counter->had;
+
+		if (max < 0 || had < 0) {//断言
+			success = FALSE;
+			break;
+		}
+		//可分配，则可释放
+		if (max <= had + resource->count) {
+			resource->count += had;
+		}
+		else {
+			success = FALSE;
+			break;
+		}
+	}
+
+	//恢复分配
+	if (FALSE == success) {
+		i = i - 1;
+		for (; i > -1; i--) {
+			resource = ArrayList_get(&(banker->resources), i);
+			counter = ArrayList_get(&(allocation->counter), i);
+			assert(counter != NULL);
+			had = counter->had;
+			//恢复分配
+			resource->count -= had;
+		}
+	}
+
+	return success;
+}
+
+Boolean DeadLock_security_recoverRelease(Banker* banker, Int index) {
+	if (NULL == banker || index < 0 || index >= banker->process_count) {
+		return FALSE;
+	}
+	//获得分配行
+	Allocation* allocation = ArrayList_get(&(banker->allocations), index);
+	if (NULL == allocation) {//断言
+		return FALSE;
+	}
+	//恢复分配，即再分配
+	Resource* resource;
+	AllocationCounter* counter;
+	Int had = 0;
+	for (Int i = 0; i < banker->resource_count; i++) {
+		resource = ArrayList_get(&(banker->resources), i);
+		if (NULL == resource) {//断言
+			return FALSE;
+		}
+		counter = ArrayList_get(&(allocation->counter), i);
+		assert(NULL != counter);
+		//恢复分配
+		resource->count -= counter->had;
+	}
+
 	return TRUE;
 }
 

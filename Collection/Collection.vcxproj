@@ -33,7 +33,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ArrayList.h" />
+    <ClInclude Include="IndexList.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Heap.h" />
     <ClInclude Include="LinkList.h" />
@@ -148,6 +149,8 @@
     <ClCompile Include="ArrayList.c" />
     <ClCompile Include="Heap.c" />
     <ClCompile Include="LinkList.c" />
+    <ClCompile Include="IndexList.c" />
+    <ClCompile Include="Primitive.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,6 @@
 #include "LinkList.h"
 #include <malloc.h>
+#include <assert.h>
 
 Boolean LinkList_swap(LinkList* list, LinkNode* node1, LinkNode* node2)
 {
@@ -83,15 +84,15 @@ Boolean LinkList_swap(LinkList* list, LinkNode* node1, LinkNode* node2)
 	return TRUE;
 }
 
-Boolean LinkList_addPrevious(LinkList* list, LinkNode* node, Element element)
+LinkNode* LinkList_addPrevious(LinkList* list, LinkNode* node, Element element)
 {
 	if (NULL == list || NULL == node || NULL == element) {
-		return FALSE;
+		return NULL;
 	}
 	//创建节点
 	LinkNode* new_node = (LinkNode*)malloc(sizeof(LinkNode));
 	if (NULL == new_node) {
-		return FALSE;
+		return NULL;
 	}
 	new_node->element = element;
 	new_node->previous = node->previous;
@@ -106,18 +107,18 @@ Boolean LinkList_addPrevious(LinkList* list, LinkNode* node, Element element)
 	if (list->head == node) {
 		list->head = new_node;
 	}
-	return TRUE;
+	return new_node;
 }
 
-Boolean LinkList_addAfter(LinkList* list, LinkNode* node, Element element)
+LinkNode* LinkList_addAfter(LinkList* list, LinkNode* node, Element element)
 {
 	if (NULL == list || NULL == node || NULL == element) {
-		return FALSE;
+		return NULL;
 	}
 	//创建节点
 	LinkNode* new_node = (LinkNode*)malloc(sizeof(LinkNode));
 	if (NULL == new_node) {
-		return FALSE;
+		return NULL;
 	}
 	new_node->element = element;
 	new_node->previous = node;
@@ -133,7 +134,7 @@ Boolean LinkList_addAfter(LinkList* list, LinkNode* node, Element element)
 		list->tail = new_node;
 	}
 
-	return TRUE;
+	return new_node;
 }
 
 Boolean LinkList_add(LinkList* list, Element element)
@@ -157,8 +158,9 @@ Boolean LinkList_add(LinkList* list, Element element)
 
 		return TRUE;
 	}
-
-	return LinkList_addAfter(list, list->tail, element);
+	LinkNode* new_node = LinkList_addAfter(list, list->tail, element);
+	assert(NULL != new_node);
+	return TRUE;
 }
 
 Element LinkList_remove(LinkList* list, LinkNode* node)
