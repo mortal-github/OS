@@ -148,3 +148,22 @@ Int ArrayList_indexOf(ArrayList* list, Element element, Boolean(*equals)(Element
 	}
 	return -1;
 }
+
+
+Boolean ArrayList_forEach(ArrayList* list, Boolean(*Element_runable)(Element element))
+{
+	if (NULL == list || NULL == Element_runable) {
+		return FALSE;
+	}
+	Boolean success = TRUE;
+	Element element;
+	for (Int i = 0; i < list->size; i++) {
+		element = ArrayList_get(list, i);
+		success = Element_runable(element);
+		if (FALSE == success) {
+			return success;
+		}
+	}
+
+	return success;
+}

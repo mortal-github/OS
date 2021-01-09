@@ -50,4 +50,6 @@ Boolean DynamicPartition_freeMin(LinkList* list, Pointer address);
 Boolean DynamicPartition_print(LinkList* list);
 
 void DynamicPartition_test();
+
+void DynamicPartition_show();
 #endif // !_DYNAMIC_PARTITION__H_

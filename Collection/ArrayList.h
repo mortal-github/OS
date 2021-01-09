@@ -103,6 +103,12 @@ void ArrayList_swap(ArrayList* list, Int index1, Int index2);
  隐式条件：数组链表是初始化过的，且只通过函数写数组链表；equals确实比较element和list中的元素。
 */
 Int ArrayList_indexOf(ArrayList* list, Element element, Boolean(*equals)(Element left, Element right));
-
-
+/*
+ 遍历表的每个元素，对每个元素调用Element_runable。
+ 输入条件：NULL!=array,NULL!=Element_runable。
+ 正常处理：遍历表的每个元素，对每个元素调用Element_runable，返回TRUE。
+ 错误处理：若不满足输入条件，则什么都不处理，返回FALSE。若调用Element_runable返回FALSE,停止遍历，返回FALSE。
+ 隐式条件：表是初始化过的，且只通过函数写表。
+ */
+Boolean ArrayList_forEach(ArrayList* list, Boolean(*Element_runable)(Element element));
 #endif // !_ARRAY_LIST__H_

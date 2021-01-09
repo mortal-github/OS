@@ -1,12 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <malloc.h>
-#include <assert.h>
-#include <time.h>
-#include "IndexList.h"
+#include "Primitive.h"
 #include "DynamicPartition.h"
-#include "ArrayList.h"
-#include "DiskSchedule.h"
+#include <stdio.h>
 
 Boolean Int_print(Int* element) {
 	if (NULL == element) {
@@ -17,5 +11,7 @@ Boolean Int_print(Int* element) {
 }
 
 int main() {
-	
+	//Schedule_show();
+	//DeadLock_show();
+	DynamicPartition_show();
 }

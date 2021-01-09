@@ -19,7 +19,7 @@ Boolean DynamicPartition_init(LinkList* list, Int size)
 
 	Partition* first = malloc(sizeof(Partition));
 	assert(NULL != first);
-	first->address = (Pointer)1;
+	first->address = (Pointer)0;
 	first->allocated = 0;
 	first->size = size;
 	
@@ -274,17 +274,18 @@ Boolean DynamicPartition_print(LinkList* list)
 		partition = (Partition*)node->element;
 		node = node->next;
 
-		printf_s("-------------------------\n");
-		printf_s("address%2s = %p\n", " ", partition->address);
-		printf_s("size%5s = %d\n", " ", partition->size);
-		printf_s("allocated = ");
-		if (0 == partition->allocated) {
-			printf_s("FALSE\n");
+		if (partition->allocated == 0) {
+			printf_s("-------------------------\n");
+			printf_s("address%2s = %p\n", " ", partition->address);
+			printf_s("size%5s = %d\n", " ", partition->size);
+			printf_s("allocated = ");
+			if (0 == partition->allocated) {
+				printf_s("FALSE\n");
+			}
+			else {
+				printf_s("TRUE\n");
+			}
 		}
-		else {
-			printf_s("TRUE\n");
-		}
-
 	} while (NULL != node);
 	return TRUE;
 }
@@ -341,3 +342,4 @@ void DynamicPartition_test()
 		}
 	} while (1);
 }
+

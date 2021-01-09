@@ -1,6 +1,7 @@
 #include "DiskSchedule.h"
 #include <math.h>
 #include <assert.h>
+#include <stdio.h>
 #include "Heap.h"
 
 double DiskSchedule_FCFS(Int last, Int now, ArrayList* request)
