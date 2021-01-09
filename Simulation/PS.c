@@ -177,7 +177,7 @@ void runUntil(PM* pm, Int time_max, Int schedule, ArrayList* list) {
 			once_time = random(1, once_time);
 		}
 		else {
-			once_time = next_time - pm->time;
+			once_time = (Int)(next_time - pm->time);
 		}
 		//增加一个进程。
 		if (list->size > 0 && (pm->time + once_time) >= next_time) {

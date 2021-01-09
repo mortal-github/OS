@@ -18,11 +18,45 @@ Boolean Int_print(Int* element) {
 
 void Computer_simulation();
 int main() {
-	Schedule_show();//进程调度演示
-	//DeadLock_show();//银行家算法演示
-	//DynamicPartition_show();//动态分区算法演示
-	//DiskSchedule_show();//磁盘调度演示
-	//Computer_simulation();//课程设计
+	printf_s("操作系统实验与课程设计：\n");
+	printf_s("	作者：钟景文\n");
+	printf_s("	学号：3118005434\n");
+	printf_s("	班别：信息安全（2）班\n");
+	printf_s("	年级：2018年级\n");
+	printf_s("	学院：计算机学院\n");
+	printf_s("	学校：广东工业大学\n");
+	printf_s("\n\n");
+	printf_s("程序简介：\n");
+	printf_s("本程序集合了四个实验和一个课程，请通过数字选择。");
+	printf_s("1 : 实验一：进程调度演示程序\n");
+	printf_s("2 : 实验二：银行家算法演示程序\n");
+	printf_s("3 : 实验三：动态分区分配演示程序\n");
+	printf_s("4 : 实验四：磁盘调度算法演示程序\n");
+	printf_s("5 : 课程设计：操作系统演示程序\n");
+
+	Int select = 0;
+	do {
+		printf_s("输入：");
+		scanf_s("%d", &select);
+		if (select < 1 || select > 5) {
+			continue;
+		}
+	} while (1 == 0);
+
+	switch (select){
+	case 1:Schedule_show();//进程调度演示
+		break;
+	case 2:DeadLock_show();//银行家算法演示
+		break;
+	case 3:DynamicPartition_show();//动态分区算法演示
+		break;
+	case 4:DiskSchedule_show();//磁盘调度演示
+		break;
+	case 5:Computer_simulation();//课程设计
+		break;
+	default:
+		break;
+	}
 	system("pause");
 }
 
