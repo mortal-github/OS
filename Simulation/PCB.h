@@ -23,9 +23,11 @@ typedef struct PCB {
 	Long terminated;
 	Int length;
 	Int run;
+	Long wake;
 
 	//进程控制信息
-	//Long ram;
+	Pointer ram;
+	Int size;
 	//Long swap;
 	//Long disk;
 	//同步与通信机制。

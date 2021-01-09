@@ -225,7 +225,7 @@ void DiskSchedule_show()
         }
     } while (1 == 1);
 
-    Int i = 0;
+    Int i = 1;
     Int req = 0;
     printf_s("请输入磁盘请求，要求数字大于0，0表示停止输入\n");
     do {

@@ -13,6 +13,9 @@ Boolean PCB_init(PCB* pcb, Int id)
 	pcb->terminated = 0;
 	pcb->length = 0;
 	pcb->run = 0;
+	pcb->wake = 0;
+	pcb->ram = 0;
+	pcb->size = 0;
 	return TRUE;
 }
 

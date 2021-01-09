@@ -215,6 +215,9 @@ void PM_PCB_print(PCB* pcb) {
 	printf_s("|run       = %"PRId32"\n", pcb->run);
 	printf_s("|priori    = %f\n", pcb->priority);
 	printf_s("|terminate = %"PRId64"\n", pcb->terminated);
+	printf_s("|wake      = %"PRId64"\n", pcb->wake);
+	printf_s("|ram       = %p\n", pcb->ram);
+	printf_s("|size      = %d\n", pcb->size);
 	printf_s(" ！！ ！！ ！！ ！！\n");
 }
 
