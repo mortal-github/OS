@@ -25,14 +25,15 @@ int main() {
 	printf_s("	年级：2018年级\n");
 	printf_s("	学院：计算机学院\n");
 	printf_s("	学校：广东工业大学\n");
-	printf_s("\n\n");
+	printf_s("\n");
 	printf_s("程序简介：\n");
-	printf_s("本程序集合了四个实验和一个课程，请通过数字选择。");
+	printf_s("本程序集合了四个实验和一个课程，请通过数字选择。\n");
 	printf_s("1 : 实验一：进程调度演示程序\n");
 	printf_s("2 : 实验二：银行家算法演示程序\n");
 	printf_s("3 : 实验三：动态分区分配演示程序\n");
 	printf_s("4 : 实验四：磁盘调度算法演示程序\n");
 	printf_s("5 : 课程设计：操作系统演示程序\n");
+	printf_s("\n");
 
 	Int select = 0;
 	do {
