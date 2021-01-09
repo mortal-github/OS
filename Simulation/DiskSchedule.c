@@ -125,7 +125,7 @@ double DiskSchedule_SCAN(Int last, Int now, ArrayList* request)
 
 double DiskSchedule_CSCAN(Int last, Int now, ArrayList* request)
 {
-    if (last <= 0 || now <= 0 || last >= now || NULL == request) {
+    if (last <= 0 || now <= 0 || last == now || NULL == request) {
         return -1;
     }
     //排序
@@ -184,4 +184,105 @@ void DiskSchedule_test()
         Int temp = (Int)ArrayList_get(&list, i);
         printf_s(", %d", temp);
     }
+}
+
+Boolean DiskSchedule_show_print(Element element) {
+    printf_s(", %d", (Int)element);
+    return TRUE;
+}
+void DiskSchedule_show_clone(ArrayList* origin, ArrayList* copy) {
+    copy->size = 0;
+    for (Int i = 0; i < origin->size; i++) {
+        Element element = ArrayList_get(origin, i);
+        ArrayList_add(copy, copy->size, element);
+    }
+}
+void DiskSchedule_show()
+{
+    printf_s("程序简介：\n");
+    printf_s("	3118005434， 钟景文，2018级别信息安全2班，计算机学院，广东工业大学\n");
+    printf_s("	仿真各种磁盘调度算法：\n");
+    printf_s("1 ：先来先服务算法\n");
+    printf_s("2 : 最短寻道算法\n");
+    printf_s("3 : 扫描算法\n");
+    printf_s("4 ：循环扫描算法\n");
+
+    ArrayList request;
+    ArrayList_init(&request);
+
+    Int last = 0;
+    Int now = 0;
+    do {
+        printf_s("请输入磁头上一次所在的位置：");
+        scanf_s("%d", &last);
+        printf_s("请输入磁头当前所在的位置  ：");
+        scanf_s("%d", &now);
+        if (last == now) {
+            printf_s("两次位置不能相等！\n");
+        }
+        else {
+            break;
+        }
+    } while (1 == 1);
+
+    Int i = 0;
+    Int req = 0;
+    printf_s("请输入磁盘请求，要求数字大于0，0表示停止输入\n");
+    do {
+        printf_s("第% 2d个请求: ", i);
+        scanf_s("%d", &req);
+        if (0 == req) {
+            break;
+        }
+        ArrayList_add(&request, request.size, (Element)req);
+        i++;
+    } while (1 == 1);
+
+    double avg;
+    ArrayList copy;
+    ArrayList_init(&copy);
+    //先来先服务
+    DiskSchedule_show_clone(&request, &copy);
+    avg  = DiskSchedule_FCFS(80, 100, &copy);
+    printf_s("==============================\n");
+    printf_s("先来先服务：\n");
+    printf_s("平均寻道距离：%f\n", avg);
+    printf_s("寻道顺序：");
+    ArrayList_forEach(&copy, DiskSchedule_show_print);
+    printf_s("\n");
+
+    //最短寻道时间优先算法
+    DiskSchedule_show_clone(&request, &copy);
+    avg = DiskSchedule_SSTF(80, 100, &copy);
+    printf_s("==============================\n");
+    printf_s("最短寻道时间优先算法：\n");
+    printf_s("平均寻道距离：%f\n", avg);
+    printf_s("寻道顺序：");
+    ArrayList_forEach(&copy, DiskSchedule_show_print);
+    printf_s("\n");
+    
+
+    //扫描算法
+    DiskSchedule_show_clone(&request, &copy);
+    avg = DiskSchedule_SCAN(80, 100, &copy);
+    printf_s("==============================\n");
+    printf_s("扫描算法：\n");
+    printf_s("平均寻道距离：%f\n", avg);
+    printf_s("寻道顺序：");
+    ArrayList_forEach(&copy, DiskSchedule_show_print);
+    printf_s("\n");
+
+
+    //循环扫描算法
+    DiskSchedule_show_clone(&request, &copy);
+    avg = DiskSchedule_CSCAN(80, 100, &copy);
+    printf_s("==============================\n");
+    printf_s("循环扫描算法：\n");
+    printf_s("平均寻道距离：%f\n", avg);
+    printf_s("寻道顺序：");
+    ArrayList_forEach(&copy, DiskSchedule_show_print);
+    printf_s("\n");
+
+    ArrayList_destroy(&request);
+    ArrayList_destroy(&copy);
 }

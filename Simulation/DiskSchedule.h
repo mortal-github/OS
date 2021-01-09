@@ -49,4 +49,6 @@ double DiskSchedule_CSCAN(Int last, Int now, ArrayList* request);
 
 void DiskSchedule_test();
 
+void DiskSchedule_show();
+
 #endif // !_DISK_SCHEDULE__H_
