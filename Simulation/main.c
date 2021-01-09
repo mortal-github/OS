@@ -6,6 +6,7 @@
 #include "IndexList.h"
 #include "DynamicPartition.h"
 #include "ArrayList.h"
+#include "DiskSchedule.h"
 
 Boolean Int_print(Int* element) {
 	if (NULL == element) {
