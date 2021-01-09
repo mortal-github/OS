@@ -1,7 +1,7 @@
 #include "Primitive.h"
 #include "DynamicPartition.h"
 #include <stdio.h>
-
+#include <stdlib.h>
 Boolean Int_print(Int* element) {
 	if (NULL == element) {
 		return FALSE;
@@ -14,4 +14,5 @@ int main() {
 	//Schedule_show();
 	//DeadLock_show();
 	DynamicPartition_show();
+	
 }

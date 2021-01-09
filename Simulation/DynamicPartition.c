@@ -19,7 +19,7 @@ Boolean DynamicPartition_init(LinkList* list, Int size)
 
 	Partition* first = malloc(sizeof(Partition));
 	assert(NULL != first);
-	first->address = (Pointer)0;
+	first->address = (Pointer)1;
 	first->allocated = 0;
 	first->size = size;
 	
@@ -32,7 +32,7 @@ Boolean DynamicPartition_init(LinkList* list, Int size)
 Pointer DynamicPartition_mallocFirst(LinkList* list, Int size)
 {
 	if (NULL == list || size < 512) {
-		return FALSE;
+		return NULL;
 	}
 	//寻找可用区。
 	LinkNode* node = list->head;
@@ -124,7 +124,7 @@ Boolean DynamicPartition_freeFirst(LinkList* list, Pointer address)
 Pointer DynamicPartition_mallocMin(LinkList* list, Int size)
 {
 	if (NULL == list || size < 512) {
-		return FALSE;
+		return NULL;
 	}
 	//寻找可用区。
 	LinkNode* node = list->head;
@@ -343,3 +343,188 @@ void DynamicPartition_test()
 	} while (1);
 }
 
+
+//动态分配算法演示
+Boolean DynmicPartitio_show_print_element(Partition* partition) {
+	printf_s("-------------------------\n");
+	printf_s("address%2s = %p\n", " ", partition->address);
+	printf_s("size%5s = %d\n", " ", partition->size);
+	printf_s("allocated = ");
+	if (0 == partition->allocated) {
+		printf_s("FALSE\n");
+	}
+	else {
+		printf_s("TRUE\n");
+	}
+	return TRUE;
+}
+Partition* DynamicPartition_show_getPartitionFromAddress(LinkList* list, Pointer address) {
+
+	LinkNode* node = list->head;
+	while (NULL != node) {
+		Partition* partition = (Partition*)node->element;
+		if (partition->address == address) {
+			return partition;
+		}
+		node = node->next;
+	}
+
+	return NULL;
+}
+Partition* DynamicPartition_show_removePartitionFromSize(ArrayList* list, Int size) {
+	for (Int i = 0; i < list->size; i++) {
+		Partition* partition = (Partition*)ArrayList_get(list, i);
+		if (partition->size == size) {
+			return ArrayList_remove(list, i);
+		}
+	}
+	return NULL;
+}
+void DynamicPartition_show_do(LinkList* list, ArrayList* jobs, Int i, Int size, Int type,
+	Pointer(*Dmalloc)(LinkList* list, Int size), Boolean(*Dfree)(LinkList* list, Pointer address)) {
+
+	printf_s("***************************************************************************\n");
+	ArrayList* job = ArrayList_get(jobs, i-1);
+	switch (type) {
+	case 1://申请内存
+	{
+		Pointer address = Dmalloc(list, size);
+		if (address != NULL) {
+			Partition* partition = DynamicPartition_show_getPartitionFromAddress(list, address);
+			assert(partition->size == size);
+			ArrayList_add(job, job->size, partition);
+
+			printf_s("==================================================\n");
+			printf_s("作业 %d 申请 %d 字节，分配请况：\n", i, size);
+			ArrayList_forEach(job, DynmicPartitio_show_print_element);
+			printf_s("==================================================\n");
+			printf_s("空闲分区链状态：\n");
+			DynamicPartition_print(list);
+		}
+		else {
+			printf_s("作业 %d 申请 %d 字节，分配失败：\n", i, size);
+		}
+		
+
+	}break;
+	case 2://释放内存
+	{
+		Partition* partition = DynamicPartition_show_removePartitionFromSize(job, size);
+		if (NULL != partition) {
+			Dfree(list, partition->address);
+
+			printf_s("==================================================\n");
+			printf_s("作业 %d 释放 %d 字节，分配请况：\n", i, size);
+			ArrayList_forEach(job, DynmicPartitio_show_print_element);
+			printf_s("==================================================\n");
+			printf_s("空闲分区链状态：\n");
+			DynamicPartition_print(list);
+		}
+		printf_s("作业 %d 释放 %d 字节，释放失败：\n", i, size);
+	}break;
+	default:
+		break;
+	}
+
+	printf_s("\n");
+}
+void DynamicPartition_show()
+{
+	printf_s("程序简介：\n");
+	printf_s("	3118005434， 钟景文，2018级别信息安全2班，计算机学院，广东工业大学\n");
+	printf_s("	动态分区分配方式的模拟，请输入数字选择动态分区算法。\n");
+	printf_s("输入选择：\n");
+	printf_s("1 ：首次适应算法\n");
+	printf_s("2 : 最佳适应算法\n");
+	Int select = 0;
+	do {
+		printf_s("输入：");
+		scanf_s("%d", &select);
+		if (select != 1 && select != 2) {
+			continue;
+		}
+	} while (1 == 0);
+	
+	Pointer(*Dmalloc)(LinkList * list, Int size);
+	Boolean(*Dfree)(LinkList * list, Pointer address);
+	if (1 == select) {
+		Dmalloc = DynamicPartition_mallocFirst;
+		Dfree = DynamicPartition_freeFirst;
+	}
+	else {
+		Dmalloc = DynamicPartition_mallocMin;
+		Dfree = DynamicPartition_freeMin;
+	}
+	//空闲分区表
+	LinkList list;
+	DynamicPartition_init(&list, 640 * 1024);
+	//作业
+	ArrayList jobs; ArrayList_init(&jobs);
+	for (Int i = 0; i < 8; i++) {
+		ArrayList* job = malloc(sizeof(ArrayList));
+		ArrayList_init(job);
+		ArrayList_add(&jobs, jobs.size, job);
+	}
+	Int i;
+	Int size;
+	Int type;
+	//作业1申请130.
+	i = 1;
+	size = 130 * 1024;
+	type = 1;
+	DynamicPartition_show_do(&list, &jobs, i, size, type, Dmalloc, Dfree);
+
+	//作业2申请60.
+	i = 2;
+	size = 60 * 1024;
+	type = 1;
+	DynamicPartition_show_do(&list, &jobs, i, size, type, Dmalloc, Dfree);
+
+	//作业3申请100.
+	i = 3;
+	size = 100 * 1024;
+	type = 1;
+	DynamicPartition_show_do(&list, &jobs, i, size, type, Dmalloc, Dfree);
+
+	//作业2释放60.
+	i = 2;
+	size = 60 * 1024;
+	type = 2;
+	DynamicPartition_show_do(&list, &jobs, i, size, type, Dmalloc, Dfree);
+	
+	//作业4申请200.
+	i = 4;
+	size = 200 * 1024;
+	type = 1;
+	DynamicPartition_show_do(&list, &jobs, i, size, type, Dmalloc, Dfree);
+
+	//作业3释放100.
+	i = 3;
+	size = 100 * 1024;
+	type = 2;
+	DynamicPartition_show_do(&list, &jobs, i, size, type, Dmalloc, Dfree);
+
+	//作业5申请140.
+	i = 5;
+	size = 140 * 1024;
+	type = 1;
+	DynamicPartition_show_do(&list, &jobs, i, size, type, Dmalloc, Dfree);
+
+	//作业6申请60.
+	i = 6;
+	size = 60 * 1024;
+	type = 1;
+	DynamicPartition_show_do(&list, &jobs, i, size, type, Dmalloc, Dfree);
+
+	//作业7申请50.
+	i = 7;
+	size = 50 * 1024;
+	type = 1;
+	DynamicPartition_show_do(&list, &jobs, i, size, type, Dmalloc, Dfree);
+
+	//作业8申请60.
+	i = 8;
+	size = 60 * 1024;
+	type = 1;
+	DynamicPartition_show_do(&list, &jobs, i, size, type, Dmalloc, Dfree);
+}
