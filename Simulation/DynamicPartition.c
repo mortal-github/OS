@@ -427,6 +427,7 @@ void DynamicPartition_show_do(LinkList* list, ArrayList* jobs, Int i, Int size, 
 	}
 
 	printf_s("\n");
+	system("pause");
 }
 void DynamicPartition_show()
 {

@@ -609,6 +609,8 @@ void DeadLock_run(Int count) {
 		printf_s("∑÷≈‰æÿ’Û£∫\n");
 		DeadLock_printf(&banker);
 
+		system("pause");
+
 	} while (NULL != pm.run);
 }
 

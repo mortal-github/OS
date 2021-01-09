@@ -171,15 +171,22 @@ void runUntil(PM* pm, Int time_max, Int schedule, ArrayList* list) {
 	
 	do {
 		//经过一段时间
-		once_time = pm->run->length - pm->run->run;
-		once_time = time_max < once_time ? time_max : once_time;
-		once_time = random(1, once_time);
+		if (NULL != pm->run) {
+			once_time = pm->run->length - pm->run->run;
+			once_time = time_max < once_time ? time_max : once_time;
+			once_time = random(1, once_time);
+		}
+		else {
+			once_time = next_time - pm->time;
+		}
 		//增加一个进程。
 		if (list->size > 0 && (pm->time + once_time) >= next_time) {
 			once_time = (Int)(next_time - pm->time);
 			pcb = ArrayList_remove(list, 0);
 			ArrayList_add(&pm->runnable, pm->runnable.size, pcb);
-			
+			if (NULL == pm->run) {
+				PM_setRun(pm, pcb);
+			}
 			if (list->size > 0) {
 				pcb = ArrayList_get(list, 0);
 				next_time = pcb->arrive;
@@ -198,8 +205,9 @@ void runUntil(PM* pm, Int time_max, Int schedule, ArrayList* list) {
 			printf_s("\n");
 
 			old_time = pm->time;
+			system("pause");//暂停
 		}
-	} while (NULL != pm->run);
+	} while (NULL != pm->run || 0 != list->size);
 }
 
 void Schedule_show()

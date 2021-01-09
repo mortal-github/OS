@@ -18,7 +18,7 @@ Boolean Int_print(Int* element) {
 
 void Computer_simulation();
 int main() {
-	//Schedule_show();//进程调度演示
+	Schedule_show();//进程调度演示
 	//DeadLock_show();//银行家算法演示
 	//DynamicPartition_show();//动态分区算法演示
 	//DiskSchedule_show();//磁盘调度演示
@@ -82,7 +82,7 @@ void Computer_simulation() {
 		printf_s("进程信息：\n");
 		PM_print(&pm);
 		printf_s("\n");
-		//system("pause");//暂停
+		system("pause");//暂停
 
 
 		//4. 随机阻塞进程，并在一段时间后唤醒进程（选做)
